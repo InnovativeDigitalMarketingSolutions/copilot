@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CoPilot Dashboard</title>
+  <style>
+    body { font-family: sans-serif; margin: 2rem; }
+    .card { border: 1px solid #ccc; padding: 1rem; margin-bottom: 1rem; border-radius: 5px; }
+    .done { color: green; }
+    .todo { color: orange; }
+    .in_progress { color: blue; }
+  </style>
+</head>
+<body>
+  <h1>🚀 CoPilot Sprint Dashboard</h1>
+  <p>Laatst bijgewerkt: {{ timestamp.strftime("%Y-%m-%d %H:%M:%S") }}</p>
+
+  <div class="card">
+    <h2>📊 Task Stats</h2>
+    <ul>
+      <li>✅ Done: {{ stats.done }}</li>
+      <li>🕗 In Progress: {{ stats.in_progress }}</li>
+      <li>📝 Todo: {{ stats.todo }}</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>🧩 Taken</h2>
+    <ul>
+      {% for task in tasks %}
+      <li class="{{ task.status }}">{{ task.title }} — <strong>{{ task.status }}</strong></li>
+      {% endfor %}
+    </ul>
+  </div>
+</body>
+</html>
