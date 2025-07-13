@@ -22,6 +22,7 @@ The backend is composed of the following core layers:
 - Core logic in `core/dispatcher/`.
 - Determines which agent or domain handles each task.
 - Supports confidence scoring and fallback model routing via `model_router.py`.
+- In future: supports external GPT profiles via Bring Your Own GPT (BYO-GPT).
 
 ### 3. Agent Layer
 - Agents (in `agents/`) encapsulate prompting, memory injection, and task execution.
@@ -93,6 +94,15 @@ This allows consistent chaining, fallback logic, and memory alignment.
 
 - JWT-based user & tenant identification via `core/auth.py`
 - Every context item, memory, and action is tenant-scoped
+
+---
+
+## 🧪 Bring Your Own GPT (BYO-GPT) – Future Extension
+
+- Tenants may register their own GPT endpoints (OpenAI, Claude, Mistral, etc.)
+- Registered in a `gpt_profiles` table with metadata and API info
+- Dispatcher dynamically invokes user-defined models when configured
+- Scoped to tenant sandbox and tied to specific agent/task roles
 
 ---
 

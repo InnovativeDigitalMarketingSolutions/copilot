@@ -9,15 +9,19 @@ class ProjectAgent(BaseAgent):
         super().__init__(input_data, tenant_id, tools, logger)
 
     def run(self):
-        self.logger(
+        self.logger.info(
             f"[{self.__class__.__name__}] Start run met input: {self.input_data}"
         )
 
+        title = self.input_data.get("title")
+        if not title:
+            raise ValueError("Missing required field: 'title'")
+
         result = {
             "success": True,
-            "message": f"Project aangemaakt met titel: {self.input_data.get('title')}",
-            "agent_name": "project_manager",
+            "message": f"Project aangemaakt met titel: {title}",
+            "agent_name": self.__class__.__name__.lower(),
         }
 
-        self.logger(f"[{self.__class__.__name__}] Output: {result}")
+        self.logger.info(f"[{self.__class__.__name__}] Output: {result}")
         return result
