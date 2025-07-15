@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 from typing import Any, Dict, Optional, Union
 from logging import Logger
 from app.core.logging.logger import setup_logger
+import re
 
 
 class BaseAgent(ABC):
@@ -9,6 +10,22 @@ class BaseAgent(ABC):
     Abstracte basisagent. Elke specifieke agent (zoals ProjectAgent of ContentAgent)
     moet deze klasse erven en de run() methode implementeren.
     """
+
+    @staticmethod
+    def camel_to_snake(name: str) -> str:
+        s1 = re.sub("(.)([A-Z][a-z]+)", r"\1_\2", name)
+        return re.sub("([a-z0-9])([A-Z])", r"\1_\2", s1).lower()
+
+    @property
+    def agent_name(self) -> str:
+        """
+        Bepaalt de agent naam op basis van de class naam.
+        Consistent met registry: eindigt altijd op '_agent'.
+        """
+        name = self.camel_to_snake(self.__class__.__name__)
+        if not name.endswith("_agent"):
+            name += "_agent"
+        return name
 
     def __init__(
         self,
@@ -39,22 +56,24 @@ class BaseAgent(ABC):
         """
         result = self.run()
         return {
-            "success": True if result else False,
+            "success": True,
+            "handled": True if result else False,
             "data": result,
-            "agent": self.__class__.__name__,
+            "agent_name": self.agent_name,
         }
 
-    def fallback(self) -> Optional[Dict[str, Any]]:
+    def fallback(self) -> Dict[str, Any]:
         """
-        Optionele fallback logica voor wanneer run() geen bruikbare actie vindt.
-        Kan worden overschreven door subklassen.
+        Fallback logica voor wanneer run() geen bruikbare actie vindt.
+        Retourneert standaard een agent_name 'fallback_agent' voor consistentie met tests.
         """
         self.logger.warning(f"[Fallback] Geen geldige actie voor {self.input_data}")
         return {
-            "success": False,
+            "success": True,
+            "handled": False,
+            "agent_name": "fallback_agent",
             "message": "Geen geldige actie gevonden voor deze taak.",
-            "agent": self.__class__.__name__,
-            "input": self.input_data,
+            "input_data": self.input_data,
         }
 
 

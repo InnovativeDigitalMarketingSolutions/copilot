@@ -3,8 +3,8 @@ from app.agents.base import BaseAgent
 from app.agents.registry import register_agent
 
 
-@register_agent("project_agent")
-class ProjectAgent(BaseAgent):
+@register_agent("project_manager_agent")
+class ProjectManagerAgent(BaseAgent):
     def __init__(self, input_data, tenant_id="default", tools=None, logger=None):
         super().__init__(input_data, tenant_id, tools, logger)
 
@@ -18,9 +18,8 @@ class ProjectAgent(BaseAgent):
             raise ValueError("Missing required field: 'title'")
 
         result = {
-            "success": True,
+            "handled": True,
             "message": f"Project aangemaakt met titel: {title}",
-            "agent_name": self.__class__.__name__.lower(),
         }
 
         self.logger.info(f"[{self.__class__.__name__}] Output: {result}")

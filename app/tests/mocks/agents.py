@@ -1,5 +1,7 @@
 class MockAgent:
-    def __init__(self, input_data, tenant_id=None, tools=None, logger=None, metadata=None):
+    def __init__(
+        self, input_data, tenant_id=None, tools=None, logger=None, metadata=None
+    ):
         self.input_data = input_data
         self.tenant_id = tenant_id
         self.tools = tools or {}

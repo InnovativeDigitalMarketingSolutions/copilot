@@ -1,33 +1,56 @@
-from supabase import create_client, Client
+from supabase import create_client
 from app.core.config.settings import settings
 from app.core.logging.logger import setup_logger
-
+import os
+import logging
 
 LOGGER = setup_logger(__name__)
 
 
 class SupabaseClient:
     def __init__(self, logger=None):
-        if not settings.supabase_url or not settings.supabase_key:
-            raise ValueError("Supabase URL and/or KEY missing in settings")
 
-        self.logger = logger or LOGGER
-        self.client: Client = create_client(
-            settings.supabase_url, settings.supabase_key
-        )
-        self.logger.info("Supabase client initialized")
+        self.logger = logger or logging.getLogger(__name__)
+
+        url = os.getenv("SUPABASE_URL")
+        key = os.getenv("SUPABASE_KEY")
+
+        if not url or not key:
+            raise ValueError("Missing Supabase credentials")
+
+        self.client = create_client(url, key)
+
+        self.logger.info("SupabaseClient initialized.")
+
+    def table(self, name: str):
+        return self.client.table(name)
+
+    @staticmethod
+    def _get_supabase_credentials():
+        url = settings.supabase_url or os.getenv("SUPABASE_URL")
+        key = settings.supabase_key or os.getenv("SUPABASE_KEY")
+
+        if not url or not key:
+            raise ValueError("Missing Supabase credentials")
+
+        return url, key
 
     def insert(self, table: str, data: dict):
         import json
-        from datetime import datetime
+        from datetime import datetime, timezone
 
         # Ensure data is a list of dicts
         if isinstance(data, dict):
             data = [data]
         # Add standard fields
         for row in data:
-            row.setdefault("created_at", datetime.utcnow().isoformat())
+            row["created_at"] = datetime.now(timezone.utc).isoformat()
             row.setdefault("source", "default")
+        # Ensure all datetime fields are stringified for JSON serialization
+        for row in data:
+            for k, v in row.items():
+                if isinstance(v, datetime):
+                    row[k] = v.isoformat()
         # Check JSON serializability of the list
         try:
             json.dumps(data)

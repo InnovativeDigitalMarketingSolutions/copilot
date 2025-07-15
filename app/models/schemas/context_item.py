@@ -1,6 +1,14 @@
 from pydantic import BaseModel, Field
 from typing import Optional
 from datetime import datetime
+from enum import Enum
+
+
+class TaskType(str, Enum):
+    short_term = "short_term"
+    long_term = "long_term"
+    reference = "reference"
+    todo = "todo"
 
 
 class ContextItem(BaseModel):
@@ -9,8 +17,8 @@ class ContextItem(BaseModel):
     session_id: Optional[str] = Field(
         None, description="Sessie-ID indien van toepassing"
     )
-    source: str = Field("api", description="Bron van de input, standaard 'api'")
-    task: Optional[str] = Field(None, description="Gerelateerde taak of agent")
+    source: str = Field("default", description="Bron van de input, standaard 'default'")
+    task: Optional[TaskType] = Field(None, description="Gerelateerde taak of agent")
     tenant_id: str = Field("default", description="Tenant of organisatie-ID")
     metadata: Optional[dict] = Field(default_factory=dict, description="Extra metadata")
     created_at: datetime = Field(

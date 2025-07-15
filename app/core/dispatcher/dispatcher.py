@@ -1,7 +1,6 @@
 import traceback
 from app.agents.registry import get_agent
 from typing import Dict, Any
-from app.agents.base import FallbackAgent
 
 
 def dispatch_task(payload: Dict[str, Any], logger=None) -> Dict[str, Any]:
@@ -30,10 +29,17 @@ def dispatch_task(payload: Dict[str, Any], logger=None) -> Dict[str, Any]:
 
     if not agent_cls:
         if logger:
-            logger.warning(
-                f"No agent found for task '{task_type}', using FallbackAgent."
+            logger.info(
+                f"Fallback path triggered for task '{task_type}' in tenant '{tenant_id}'."
             )
-        agent_cls = FallbackAgent
+        return {
+            "success": True,
+            "data": {
+                "agent_name": "fallback_agent",
+                "handled": False,
+                "message": "No agent found for task.",
+            },
+        }
 
     agent = agent_cls(
         input_data=payload,

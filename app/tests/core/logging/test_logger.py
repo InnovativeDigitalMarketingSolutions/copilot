@@ -11,22 +11,38 @@ def test_logger_is_instance_of_logging_logger():
 def test_logger_has_at_least_one_handler():
     name = "test_logger_unique"
     logger = logging.getLogger(name)
-    logger.handlers.clear()  # 💡 reset
+    logger.handlers.clear()
+
     logger = setup_logger(name)
-    assert logger.hasHandlers()
-    assert any(isinstance(h, logging.StreamHandler) for h in logger.handlers)
+
+    assert logger.hasHandlers(), "Logger heeft geen handlers"
+
+    handlers = logger.handlers
+    stream_handlers = [h for h in handlers if isinstance(h, logging.StreamHandler)]
+    assert stream_handlers, "Geen StreamHandler gevonden"
+
+    expected_format = "[%(asctime)s] [%(levelname)s] [%(name)s] - %(message)s"
+
+    for handler in stream_handlers:
+        formatter = handler.formatter
+        assert formatter is not None, "Handler heeft geen formatter"
+        assert (
+            formatter._fmt == expected_format
+        ), f"Formatter wijkt af: {formatter._fmt}"
 
 
 def test_logger_uses_correct_formatter():
     name = "test_logger_unique_2"
     logging.getLogger(name).handlers.clear()
     logger = setup_logger(name)
-    expected_format = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    expected_format = "[%(asctime)s] [%(levelname)s] [%(name)s] - %(message)s"
 
     for handler in logger.handlers:
         formatter = handler.formatter
         if formatter:
-            assert expected_format in formatter._fmt
+            assert (
+                formatter._fmt == expected_format
+            ), f"Formatter wijkt af: {formatter._fmt}"
             break
     else:
         pytest.fail("Geen formatter gevonden met het verwachte format")

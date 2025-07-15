@@ -8,10 +8,11 @@ AGENT_REGISTRY: Dict[str, Type[BaseAgent]] = {}
 logger = logging.getLogger(__name__)
 
 
-def register_agent(name: str):
+def register_agent(name: Optional[str] = None):
     def wrapper(cls: Type[BaseAgent]):
-        AGENT_REGISTRY[name] = cls
-        logger.info(f"✅ Agent '{name}' geregistreerd als {cls.__name__}")
+        agent_name = name or cls.__name__.replace("Agent", "").lower() + "_agent"
+        AGENT_REGISTRY[agent_name] = cls
+        logger.info(f"✅ Agent '{agent_name}' geregistreerd als {cls.__name__}")
         return cls
 
     return wrapper
