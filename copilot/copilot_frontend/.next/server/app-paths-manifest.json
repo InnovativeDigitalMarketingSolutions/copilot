@@ -1,0 +1,8 @@
+{
+  "/Marketplace/page": "app/Marketplace/page.js",
+  "/ProjectManagement/page": "app/ProjectManagement/page.js",
+  "/Dashboard/page": "app/Dashboard/page.js",
+  "/Settings/page": "app/Settings/page.js",
+  "/TaskMonitor/page": "app/TaskMonitor/page.js",
+  "/Reports/page": "app/Reports/page.js"
+}

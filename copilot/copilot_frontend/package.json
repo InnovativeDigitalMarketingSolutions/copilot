@@ -1,0 +1,45 @@
+{
+  "name": "copilot_frontend",
+  "version": "1.0.0",
+  "description": "Frontend for Copilot Business Suite",
+  "type": "commonjs",
+  "author": "Yannick Mac Gillavry",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jouw-repo/copilot"
+  },
+  "keywords": [
+    "copilot",
+    "frontend",
+    "nextjs",
+    "saas",
+    "ai"
+  ],
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "@radix-ui/react-popover": "^1.1.14",
+    "@shadcn/ui": "^0.0.4",
+    "lucide-react": "^0.525.0",
+    "next": "^15.4.1",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.11",
+    "@types/node": "24.0.14",
+    "@types/react": "19.1.8",
+    "autoprefixer": "^10.4.21",
+    "eslint": "^8.56.0",
+    "eslint-config-next": "^15.4.1",
+    "postcss": "^8.5.6",
+    "prettier": "^3.2.5",
+    "tailwindcss": "^4.1.11",
+    "typescript": "^5.4.0"
+  }
+}
