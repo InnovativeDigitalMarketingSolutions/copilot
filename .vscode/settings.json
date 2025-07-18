@@ -1,0 +1,5 @@
+{
+    "python.analysis.extraPaths": [
+        "./copilot_backend/app/tests/core/services/test_"
+    ]
+}

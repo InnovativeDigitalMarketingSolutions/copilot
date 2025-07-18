@@ -1,0 +1,13 @@
+# Node & Python
+copilot_frontend/node_modules/
+copilot_backend/__pycache__/
+copilot_backend/.venv/
+copilot_backend/.mypy_cache/
+
+# Editor & OS
+.DS_Store
+.envcopilot_frontend/node_modules/
+copilot_backend/__pycache__/
+copilot_backend/.venv/
+.DS_Store
+.env

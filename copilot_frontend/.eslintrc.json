@@ -1,0 +1,9 @@
+{
+  "extends": ["next", "next/core-web-vitals", "eslint:recommended", "prettier"],
+  "plugins": ["unused-imports"],
+  "rules": {
+    "unused-imports/no-unused-imports": "warn",
+    "react-hooks/exhaustive-deps": "warn",
+    "no-console": "warn"
+  }
+}
