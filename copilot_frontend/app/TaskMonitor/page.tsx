@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Play, Pause, Square, MoreVertical, Clock, AlertTriangle, CheckCircle } from 'lucide-react';
-import { Task } from '../../app/types/TaskType';
+import { Task } from '../types/TaskType';
 
 export default function TaskMonitor() {
   const [tasks] = useState<Task[]>([

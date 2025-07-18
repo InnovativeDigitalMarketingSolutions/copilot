@@ -1,8 +1,8 @@
-// File: /Users/yannickmacgillavry/copilot/copilot/copilot_frontend/app/Settings/page.tsx
-import * as entry from '../../../../app/Settings/page.js'
+// File: /Users/yannickmacgillavry/copilot/copilot/copilot_frontend/app/TaskMonitor/page.tsx
+import * as entry from '../../../../app/TaskMonitor/page.jsx'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
-type TEntry = typeof import('../../../../app/Settings/page.js')
+type TEntry = typeof import('../../../../app/TaskMonitor/page.jsx')
 
 type SegmentParams<T extends Object = any> = T extends Record<string, any>
   ? { [K in keyof T]: T[K] extends string ? string | string[] | undefined : never }

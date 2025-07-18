@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Save, Shield, Sliders, User, Bell } from 'lucide-react';
-import { Agent } from '../../app/types/AgentType';
+import { Agent } from '../types/AgentType';
 
 export default function Settings() {
   const [activeTab, setActiveTab] = useState<'autonomy' | 'profile' | 'notifications' | 'security'>('autonomy');
