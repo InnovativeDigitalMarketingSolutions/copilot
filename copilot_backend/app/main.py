@@ -6,6 +6,8 @@ from app.api.routes import input
 from app.agents.agent_loader import load_all_agents
 from app.dashboard.routes import router as dashboard_router
 
+from app.tests.routes.routes_test import router as context_test_router
+
 
 app = FastAPI(title="CoPilot AI Business Suite")
 
@@ -28,3 +30,5 @@ templates = Jinja2Templates(directory="app/dashboard/templates")
 app.include_router(dashboard_router)
 app.include_router(health.router, prefix="/health", tags=["health"])
 app.include_router(input.router, prefix="/input", tags=["input"])
+
+app.include_router(context_test_router, prefix="/test")

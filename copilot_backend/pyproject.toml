@@ -1,9 +1,12 @@
 [project]
-name = "copilot-backend"
+name = "copilot_backend"
 version = "0.1.0"
 description = "AI Business Suite Backend"
 authors = [
     {name = "Yannick",email = "yannickmacgillavry@gmail.com"}
+]
+packages = [
+    { include = "app"}
 ]
 readme = "README.md"
 requires-python = ">=3.10,<4.0"

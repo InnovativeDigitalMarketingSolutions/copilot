@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+</head>
+<body>
+    <h1>Admin Panel</h1>
+
+    <h2>Laatste Pytest Output:</h2>
+    <pre style="background:#eee;padding:1em;">
+    {% for line in pytest_output %}
+        {{ line }}
+    {% endfor %}
+    </pre>
+</body>
+</html>
