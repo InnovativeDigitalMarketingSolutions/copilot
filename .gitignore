@@ -12,3 +12,5 @@ copilot_backend/.venv/
 .DS_Store
 .env
 *.pyc
+node_modules/
+**/node_modules/
