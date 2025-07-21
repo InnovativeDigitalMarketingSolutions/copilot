@@ -246,3 +246,51 @@ Run manually:
 ruff check .
 black .
 mypy .
+```
+
+# Copilot Project
+
+## BMAD Workflow
+
+BMAD (Brian's Make And Deploy) is set up for this project to streamline development tasks.
+
+### Available Commands
+
+```bash
+# List all available tasks
+poetry run python bmad-run.py --list
+
+# Run specific tasks
+poetry run python bmad-run.py test          # Run all tests
+poetry run python bmad-run.py test-backend  # Run only backend tests
+poetry run python bmad-run.py dev           # Start development environment
+poetry run python bmad-run.py dev-backend   # Start only backend server
+poetry run python bmad-run.py dev-frontend  # Start only frontend server
+poetry run python bmad-run.py deploy        # Deploy with Docker Compose
+poetry run python bmad-run.py lint          # Run linting
+poetry run python bmad-run.py format        # Format code
+poetry run python bmad-run.py clean         # Clean cache files
+poetry run python bmad-run.py install-deps  # Install dependencies
+poetry run python bmad-run.py build         # Build project
+```
+
+### Quick Start
+
+1. **Install dependencies:**
+   ```bash
+   poetry run python bmad-run.py install-deps
+   ```
+
+2. **Start development environment:**
+   ```bash
+   poetry run python bmad-run.py dev
+   ```
+
+3. **Run tests:**
+   ```bash
+   poetry run python bmad-run.py test
+   ```
+
+### Configuration
+
+BMAD tasks are defined in `bmad.yaml`. You can modify this file to add new tasks or change existing ones.

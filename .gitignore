@@ -11,3 +11,4 @@ copilot_backend/__pycache__/
 copilot_backend/.venv/
 .DS_Store
 .env
+*.pyc
